@@ -4,6 +4,12 @@
   padding: 0;
 }
 
+main {
+  margin: 0 auto;
+  padding: 20px;
+  max-width: 640px;
+}
+
 #acertos {
   text-align: center;
   background: #a3e635;
