@@ -97,6 +97,9 @@ const quiz = document.querySelector("#quiz");
 const template = document.querySelector("template");
 
 const corretas = new Set();
+const totalDePerguntas = perguntas.length;
+const mostrarTotal = document.querySelector("#acertos span");
+mostrarTotal.textContent = corretas.size + " de " + totalDePerguntas;
 
 // loop ou laço de repetição
 for (const item of perguntas) {
@@ -116,14 +119,16 @@ for (const item of perguntas) {
     dt.querySelector("input").value = item.respostas.indexOf(resposta);
 
     // quando o input sobre um evento de onChange - mudança
-    dt.querySelector("input").onChange = (evento) => {
+    dt.querySelector("input").onchange = (evento) => {
       // armazena o item correto na variavel "estaCorreta"
-      const estaCorreta = evento.target.value = item.correta;
+      const estaCorreta = evento.target.value == item.correta;
 
       corretas.delete(item)
       if (estaCorreta) {
         corretas.add(item)
       }
+
+      mostrarTotal.textContent = corretas.size + " de " + totalDePerguntas;
     }
 
     quizItem.querySelector("dl").appendChild(dt);
