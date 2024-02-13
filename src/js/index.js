@@ -96,6 +96,8 @@ const perguntas = [
 const quiz = document.querySelector("#quiz");
 const template = document.querySelector("template");
 
+const corretas = new Set();
+
 // loop ou laço de repetição
 for (const item of perguntas) {
   // uso o cloneNode para clonar o nó (filhos do elemento template)
@@ -109,8 +111,20 @@ for (const item of perguntas) {
     dt.querySelector("span").textContent = resposta;
     // adiciona atributo name no input
     dt.querySelector("input").setAttribute("name", "pergunta-" + perguntas.indexOf(item));
+
     // adiciona os valores no input 
     dt.querySelector("input").value = item.respostas.indexOf(resposta);
+
+    // quando o input sobre um evento de onChange - mudança
+    dt.querySelector("input").onChange = (evento) => {
+      // armazena o item correto na variavel "estaCorreta"
+      const estaCorreta = evento.target.value = item.correta;
+
+      corretas.delete(item)
+      if (estaCorreta) {
+        corretas.add(item)
+      }
+    }
 
     quizItem.querySelector("dl").appendChild(dt);
   }
