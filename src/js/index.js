@@ -107,6 +107,10 @@ for (const item of perguntas) {
   for (const resposta of item.respostas) {
     const dt = quizItem.querySelector("dl dt").cloneNode(true);
     dt.querySelector("span").textContent = resposta;
+    // adiciona atributo name no input
+    dt.querySelector("input").setAttribute("name", "pergunta-" + perguntas.indexOf(item));
+    // adiciona os valores no input 
+    dt.querySelector("input").value = item.respostas.indexOf(resposta);
 
     quizItem.querySelector("dl").appendChild(dt);
   }
